@@ -10,9 +10,18 @@ import fs from "fs";
 import { fileURLToPath } from "url";
 import multer from "multer";
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+import { createClient } from "@supabase/supabase-js";
+
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Supabase Cloud Client Setup
+const SUPABASE_URL = process.env.SUPABASE_URL || "https://dhkitaftpuqewfarqmeh.supabase.co";
+const SUPABASE_KEY = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_PUBLISHABLE_KEY || "sb_publishable_GSOmTCARbGjCz_Z2Sfxm8Q_FGaYJYI4";
+export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
