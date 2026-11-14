@@ -1,0 +1,134 @@
+{
+  "students": [],
+  "donations": [],
+  "timelines": [],
+  "claims": [],
+  "feedback": [
+    {
+      "id": "fb-1",
+      "name": "ChandraKanta Das",
+      "roll_number": "2024-MCA-014",
+      "email": "ck.das@campus.edu",
+      "rating": 5,
+      "category": "Donation Process",
+      "message": "MedRelief made donating surplus medicines so seamless. The in-browser OCR scanner extracted my strip details instantly and drop-box pickup gave full tracking!",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80",
+      "created_at": "2026-11-14T06:14:22.791Z"
+    },
+    {
+      "id": "fb-2",
+      "name": "Sakil Ahmed",
+      "roll_number": "Tech Hackers",
+      "email": "sakil@tech.org",
+      "rating": 5,
+      "category": "Drop-Box Convenience",
+      "message": "This campus circular healthcare initiative is phenomenal. Knowing unused medicines go directly to verified NGOs instead of landfills gives real purpose.",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80",
+      "created_at": "2026-11-14T06:14:22.794Z"
+    },
+    {
+      "id": "fb-3",
+      "name": "Mangesh Patil",
+      "roll_number": "Roll 87",
+      "email": "mangesh@campus.edu",
+      "rating": 5,
+      "category": "NGO Partner Experience",
+      "message": "I think this is the best innovative thinking out of the box. Pure zero monetization with complete clinical audit transparency!",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80",
+      "created_at": "2026-11-14T06:14:22.794Z"
+    }
+  ],
+  "ngos": [
+    {
+      "id": "ngo-1",
+      "name": "Red Cross Mobile Health Wing",
+      "registration_no": "MH/PUN/2018/NGO-0891",
+      "contact_person": "Dr. Matthew Joseph",
+      "email": "contact@redcross.org.in",
+      "phone": "+91 98220 11920",
+      "address": "Community Relief Center, Pune",
+      "accepted_categories": [
+        "Emergency",
+        "First Aid",
+        "Analgesics",
+        "Antipyretics",
+        "Anti-inflammatory"
+      ]
+    },
+    {
+      "id": "ngo-2",
+      "name": "Seva Rural Health Mission",
+      "registration_no": "MH/PUN/2020/NGO-1142",
+      "contact_person": "Mrs. Sunita Jadhav",
+      "email": "health@sevarural.org",
+      "phone": "+91 94220 44512",
+      "address": "Rural Outreach Center, Mulshi & Maval",
+      "accepted_categories": [
+        "Antibiotics",
+        "Diabetes",
+        "Hypertension",
+        "Cardiovascular",
+        "Gastrointestinal"
+      ]
+    },
+    {
+      "id": "ngo-3",
+      "name": "Samarpan Elderly Care Foundation",
+      "registration_no": "MH/PUN/2016/NGO-0457",
+      "contact_person": "Mr. Deepak Kulkarni",
+      "email": "care@samarpan.org",
+      "phone": "+91 98810 77341",
+      "address": "Senior Citizen Health Center, Nigdi",
+      "accepted_categories": [
+        "Chronic Care",
+        "Arthritis",
+        "Eye Drops",
+        "Vitamins",
+        "Supplements",
+        "Hypertension"
+      ]
+    },
+    {
+      "id": "ngo-4",
+      "name": "Jan Swasthya Camp Network",
+      "registration_no": "MH/PUN/2022/NGO-2089",
+      "contact_person": "Dr. Rohini Deshmukh",
+      "email": "camps@janswasthya.org",
+      "phone": "+91 97650 33219",
+      "address": "Mobile Medical Unit, Pimpri Chinchwad",
+      "accepted_categories": [
+        "General Public Health",
+        "Dermatology",
+        "Antihistamines",
+        "Cough & Cold",
+        "Antacids"
+      ]
+    }
+  ],
+  "drop_points": [
+    {
+      "id": "dp-1",
+      "name": "Campus Central Library Foyer",
+      "building": "Central Library Building, Ground Floor",
+      "hours": "08:00 AM - 08:00 PM"
+    },
+    {
+      "id": "dp-2",
+      "name": "Student Health Center Lobby",
+      "building": "Health & Wellness Pavilion",
+      "hours": "09:00 AM - 05:00 PM"
+    },
+    {
+      "id": "dp-3",
+      "name": "Main Academic Block A Foyer",
+      "building": "Academic Complex, North Wing",
+      "hours": "08:30 AM - 06:30 PM"
+    },
+    {
+      "id": "dp-4",
+      "name": "Student Hostel Complex Hub",
+      "building": "Residential Quadrangle Gate 2",
+      "hours": "24 Hours Accessible"
+    }
+  ]
+}

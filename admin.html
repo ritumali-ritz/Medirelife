@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Admin Central Audit Vault - MedRelief</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="public/icons/icon.svg" type="image/svg+xml">
+  <style>
+    .admin-nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      border-bottom: 2px solid var(--border-color);
+      margin-bottom: 24px;
+      padding-bottom: 4px;
+    }
+    .admin-nav-btn {
+      background: transparent;
+      border: none;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+      font-family: inherit;
+    }
+    .admin-nav-btn:hover {
+      color: var(--primary);
+    }
+    .admin-nav-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      background: var(--tint-light);
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    }
+    .admin-pane {
+      display: none;
+    }
+    .admin-pane.active {
+      display: block;
+    }
+    .star-rating {
+      color: #f59e0b;
+      font-size: 14px;
+    }
+    .print-only {
+      display: none;
+    }
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printable-report-area, #printable-report-area * {
+        visibility: visible;
+      }
+      #printable-report-area {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        display: block !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Admin Statutory Header -->
+  <aside class="statutory-banner" style="background: #003338;">
+    <div class="banner-container">
+      <div>
+        🛡️ <strong>Admin Central Command & Audit Vault:</strong> Pure Non-Profit Medicine Redistribution Oversight
+      </div>
+      <div>
+        <a href="/" style="color: #fff; text-decoration: underline; font-size: 11px;">← Back to Main Campus Portal</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Admin Main Header -->
+  <header class="main-header">
+    <div class="header-container">
+      <div class="brand-logo" onclick="window.location.href='/'">
+        <div class="logo-badge" style="background: #00474f;">🛡️</div>
+        <div class="brand-text">
+          <h1>
+            MedRelief <span style="color: var(--primary);">Admin Vault</span>
+            <span class="campus-pill" style="background: #e0f2fe; color: #0369a1; border-color: #bae6fd;">Executive Access</span>
+          </h1>
+          <p>Executive Oversight &amp; Audit Compliance</p>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <button id="btn-export-report" class="btn-accent" style="padding: 8px 14px; font-size: 12px;">
+          📊 Export Audit Report
+        </button>
+        <button id="btn-admin-logout" class="btn-outline" style="font-size: 11px;">
+          Lock Vault
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-content">
+
+    <!-- Admin Authentication Gate (Modal Overlay) -->
+    <div id="admin-auth-gate" style="display: none; position: fixed; inset: 0; background: rgba(17, 24, 39, 0.85); backdrop-filter: blur(8px); z-index: 200; align-items: center; justify-content: center; padding: 20px;">
+      <div class="modal-card" style="max-width: 420px; padding: 28px; text-align: center;">
+        <div style="width: 56px; height: 56px; border-radius: 999px; background: var(--tint); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 26px; margin: 0 auto 16px;">
+          🔒
+        </div>
+        <h3 style="font-size: 18px; font-weight: 800; color: var(--text-dark); margin-bottom: 6px;">
+          Restricted Administrative Access
+        </h3>
+        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 20px;">
+          Please enter the Administrative Security Passcode to access the central audit vault.
+        </p>
+
+        <form id="form-admin-passcode">
+          <div class="form-group">
+            <input type="password" id="admin-passcode-input" placeholder="Enter Admin Passcode (e.g. admin123)" required style="text-align: center; font-size: 14px; letter-spacing: 2px;" />
+            <div style="font-size: 11px; color: var(--primary); margin-top: 6px; font-weight: 600;">
+              Hint: <code>admin123</code> or <code>medrelief2026</code>
+            </div>
+          </div>
+          <button type="submit" class="btn-primary" style="width: 100%; padding: 12px;">
+            Unlock Administrative Vault →
+          </button>
+          <div style="margin-top: 14px;">
+            <a href="/" style="font-size: 11px; color: var(--text-muted); text-decoration: underline;">Return to Campus Portal</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Live Telemetry Row -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-top">
+          <span class="metric-label">Total Waste Diverted</span>
+          <div class="metric-icon-wrap green">🌱</div>
+        </div>
+        <div class="metric-value" id="adm-total-kg">0.00 <span>kg</span></div>
+        <div class="metric-sub" id="adm-total-strips">0 strips kept from landfills</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-top">
+          <span class="metric-label">Clinical Audit Rate</span>
+          <div class="metric-icon-wrap">🛡️</div>
+        </div>
+        <div class="metric-value" id="adm-audit-rate">100%</div>
+        <div class="metric-sub">Certified by licensed pharmacist</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-top">
+          <span class="metric-label">NGO Free Dispatches</span>
+          <div class="metric-icon-wrap green">🏢</div>
+        </div>
+        <div class="metric-value" id="adm-total-claims">0</div>
+        <div class="metric-sub">100% Non-commercial handovers</div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-top">
+          <span class="metric-label">Enrolled Campus Donors</span>
+          <div class="metric-icon-wrap">🎓</div>
+        </div>
+        <div class="metric-value" id="adm-total-students">0</div>
+        <div class="metric-sub">Registered Active Donors</div>
+      </div>
+    </div>
+
+    <!-- Admin Navigation Tabs -->
+    <div class="admin-nav no-print">
+      <button class="admin-nav-btn active" data-pane="pane-update-timeline">
+        📷 Update Photos & Timeline
+      </button>
+      <button class="admin-nav-btn" data-pane="pane-donations-audit">
+        📋 All Donations Audit
+      </button>
+      <button class="admin-nav-btn" data-pane="pane-pharmacist-audit">
+        🛡️ Pharmacist Clinical Audit
+      </button>
+      <button class="admin-nav-btn" data-pane="pane-dropboxes">
+        📍 Drop-Box Locations
+      </button>
+      <button class="admin-nav-btn" data-pane="pane-proofs-vault">
+        🖼️ Handover Proofs & Signatures
+      </button>
+      <button class="admin-nav-btn" data-pane="pane-feedback">
+        💬 Dynamic Feedback (<span id="adm-feedback-count">0</span>)
+      </button>
+      <button class="admin-nav-btn" data-pane="pane-reports">
+        📊 Generate Audit Report
+      </button>
+    </div>
+
+    <!-- ==============================================================================
+         SUB-PANE 1: UPDATE PHOTOS & TIMELINE
+         ============================================================================== -->
+    <section id="pane-update-timeline" class="admin-pane active">
+      <div class="two-col-layout">
+        <!-- Form to Update Photo and Timeline -->
+        <div class="app-card">
+          <div class="section-header">
+            <div class="section-eyebrow">Direct Custody Management</div>
+            <h3 class="section-title" style="font-size: 20px;">Update Package Photo & Timeline</h3>
+            <p class="section-subtitle">Select any campus donation, upload updated verification/handover photos, and log milestone progress.</p>
+          </div>
+
+          <form id="form-admin-update-timeline">
+            <div class="form-group">
+              <label>Select Medicine Package <span class="req">*</span></label>
+              <select id="adm-select-donation" required>
+                <!-- Populated by JS -->
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Milestone Status <span class="req">*</span></label>
+              <select id="adm-select-status" required>
+                <option value="REQUESTED">REQUESTED (Pledged by Student)</option>
+                <option value="COLLECTED">COLLECTED (Picked up from drop-box)</option>
+                <option value="PHARMACIST_VERIFIED">PHARMACIST_VERIFIED (Clinically Approved)</option>
+                <option value="REJECTED">REJECTED (Biomedical Waste Disposal)</option>
+                <option value="NGO_HANDOVER_COMPLETED">NGO_HANDOVER_COMPLETED (Distributed to NGO)</option>
+              </select>
+            </div>
+
+            <!-- Upload Photo File or URL -->
+            <div class="form-group">
+              <label>Attach Updated Custody / Proof Photo</label>
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <img id="adm-photo-preview" style="display: none; width: 64px; height: 64px; border-radius: var(--radius-sm); object-fit: cover; border: 1px solid var(--border-color);" />
+                <label class="btn-outline" style="cursor: pointer; font-size: 11px;">
+                  📁 Choose Photo File
+                  <input type="file" id="adm-file-photo" accept="image/*" style="display: none;" />
+                </label>
+                <button type="button" class="btn-outline" style="font-size: 11px;" id="adm-btn-use-sample-photo">
+                  Use Sample Photo
+                </button>
+              </div>
+              <input type="hidden" id="adm-photo-url-val" />
+              <div class="form-help">Uploaded files are stored in the server <code>/uploads/</code> vault.</div>
+            </div>
+
+            <div class="form-group">
+              <label>Custom Milestone Message / Audit Note <span class="req">*</span></label>
+              <textarea id="adm-timeline-message" rows="3" placeholder="Enter custody tracking details, collector team name, or verification notes..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary" style="width: 100%;">
+              💾 Save Photo & Log Milestone Entry
+            </button>
+          </form>
+        </div>
+
+        <!-- Live Preview of Selected Item Timeline -->
+        <div class="app-card">
+          <div class="section-header">
+            <div class="section-eyebrow">Active Custody Preview</div>
+            <h4 style="font-size: 16px; font-weight: 800; color: var(--text-dark);" id="adm-preview-title">Select an Item</h4>
+          </div>
+          <div id="adm-preview-timeline-body" style="font-size: 12px; color: var(--text-muted);">
+            Choose a medicine package on the left to inspect its active custody log.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================================
+         SUB-PANE 2: ALL DONATIONS AUDIT
+         ============================================================================== -->
+    <section id="pane-donations-audit" class="admin-pane">
+      <div class="app-card">
+        <div class="section-header">
+          <div class="section-eyebrow">Master Registry</div>
+          <h3 class="section-title" style="font-size: 20px;">Campus Medicine Donations Registry</h3>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Photo</th>
+                <th>Medicine / Brand</th>
+                <th>Donor Student</th>
+                <th>Strips</th>
+                <th>Expiry</th>
+                <th>Drop-Box</th>
+                <th>Status</th>
+                <th>Target NGO</th>
+              </tr>
+            </thead>
+            <tbody id="adm-donations-tbody">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================================
+         SUB-PANE: PHARMACIST CLINICAL AUDIT DESK
+         ============================================================================== -->
+    <section id="pane-pharmacist-audit" class="admin-pane">
+      <div class="notice-box" style="margin-bottom: 20px;">
+        <div class="notice-icon">🛡️</div>
+        <div>
+          <strong>Licensed Pharmacist Clinical Audit Command:</strong>
+          Inspect physical blister seals, validate >60 days expiry shelf-life rule, approve batches for distribution to accredited partner NGOs, or route degraded units to biomedical waste disposal.
+        </div>
+      </div>
+
+      <div class="app-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 18px;">
+          <div>
+            <div class="section-eyebrow">Pharmacist Oversight</div>
+            <h3 class="section-title" style="font-size: 20px;">Clinical Audit Inspection Queue</h3>
+            <p class="section-subtitle">
+              Pending: <strong id="adm-pharma-pending" style="color: var(--primary);">0</strong> batches | Approved: <strong id="adm-pharma-approved" style="color: var(--accent-dark);">0</strong>
+            </p>
+          </div>
+          <button id="adm-btn-batch-approve" class="btn-accent" style="padding: 10px 18px;">
+            ✓ Batch Approve All Intact
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th width="40"><input type="checkbox" id="adm-check-all-audit" /></th>
+                <th width="60">Photo</th>
+                <th>Medicine Details</th>
+                <th>Quantity</th>
+                <th>Expiry Date</th>
+                <th>Status</th>
+                <th width="180">Clinical Action</th>
+              </tr>
+            </thead>
+            <tbody id="adm-pharmacist-tbody">
+              <!-- Populated by admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="app-card" style="margin-top: 24px;">
+        <div class="section-header">
+          <div class="section-eyebrow">Certified Redistribution Inventory</div>
+          <h3 class="section-title" style="font-size: 20px;">Pharmacist Approved Batches</h3>
+          <p class="section-subtitle">Batches verified safe and certified for partner NGO pickup.</p>
+        </div>
+        <div class="cards-grid" id="adm-pharma-verified-grid">
+          <!-- Populated by admin.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================================
+         SUB-PANE 3: HANDOVER PROOFS & SIGNATURES
+         ============================================================================== -->
+    <section id="pane-proofs-vault" class="admin-pane">
+      <div class="app-card">
+        <div class="section-header">
+          <div class="section-eyebrow">Non-Commercial Chain of Custody</div>
+          <h3 class="section-title" style="font-size: 20px;">Central Delivery Proofs & Signatures Vault</h3>
+          <p class="section-subtitle">Verified delivery photos & digital signatures captured during charitable NGO distributions.</p>
+        </div>
+        <div id="adm-proofs-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================================
+         SUB-PANE 4: DYNAMIC USER FEEDBACK
+         ============================================================================== -->
+    <section id="pane-feedback" class="admin-pane">
+      <div class="app-card">
+        <div class="section-header">
+          <div class="section-eyebrow">Student & Stakeholder Sentiment</div>
+          <h3 class="section-title" style="font-size: 20px;">Dynamic Feedback & Ratings Stream</h3>
+          <p class="section-subtitle">Real-time testimonials and suggestions submitted by campus donors and partner NGOs.</p>
+        </div>
+        <div id="adm-feedback-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================================
+         SUB-PANE: DROP-BOX LOCATIONS MANAGER
+         ============================================================================== -->
+    <section id="pane-dropboxes" class="admin-pane">
+      <div class="app-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
+          <div>
+            <div class="section-eyebrow">Admin Control</div>
+            <h3 class="section-title" style="font-size:20px;">&#128205; Drop-Box Locations</h3>
+            <p class="section-subtitle">Add, edit or remove campus drop-box locations. Changes reflect instantly on the main site.</p>
+          </div>
+          <button class="btn-primary" id="btn-add-dropbox" style="padding:10px 18px;">+ Add New Location</button>
+        </div>
+
+        <div id="dropbox-form-wrap" style="display:none;background:linear-gradient(135deg,#e0f7fa,#f0fdf4);border:1px solid rgba(0,160,180,0.2);border-radius:14px;padding:20px;margin-bottom:20px;">
+          <h4 style="font-size:15px;font-weight:800;color:#1a2e35;margin-bottom:14px;" id="dropbox-form-title">Add New Drop-Box</h4>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Location Name <span class="req">*</span></label>
+              <input type="text" id="dbf-name" placeholder="e.g. Main Gate Security Post" />
+            </div>
+            <div class="form-group">
+              <label>Building / Address <span class="req">*</span></label>
+              <input type="text" id="dbf-building" placeholder="e.g. Gate 1, Main Campus Entrance" />
+            </div>
+            <div class="form-group">
+              <label>Operating Hours <span class="req">*</span></label>
+              <input type="text" id="dbf-hours" placeholder="e.g. 08:00 AM - 09:00 PM" />
+            </div>
+            <input type="hidden" id="dbf-edit-id" value="" />
+            <div class="form-group" style="display:flex;gap:10px;align-items:flex-end;">
+              <button class="btn-primary" id="btn-save-dropbox" style="padding:10px 20px;">&#128190; Save Location</button>
+              <button class="btn-outline" id="btn-cancel-dropbox" style="padding:10px 16px;">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="admin-dropboxes-grid" id="admin-dropboxes-grid">
+          <!-- Populated by admin.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================================================
+         SUB-PANE 5: GENERATE & DOWNLOAD AUDIT REPORT
+         ============================================================================== -->
+    <section id="pane-reports" class="admin-pane">
+      <div class="app-card no-print">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <div class="section-eyebrow">Accreditation & Institutional Compliance</div>
+            <h3 class="section-title" style="font-size: 20px;">Official Campus Activity Audit Report</h3>
+            <p class="section-subtitle">Certified reporting document for NAAC, AICTE, and University environmental audits.</p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="btn-primary" onclick="window.printReport()">
+              🖨️ Print / Save as PDF
+            </button>
+            <button class="btn-outline" onclick="window.exportCsvReport()">
+              📥 Export CSV Spreadsheet
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Printable Report Container -->
+      <div id="printable-report-area" class="app-card" style="background: #fff; padding: 36px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #007380; padding-bottom: 16px; margin-bottom: 20px;">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: #007380; color: #fff; font-size: 24px; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 115, 128, 0.3);">+</div>
+            <div>
+              <h2 style="font-size: 18px; font-weight: 800; color: #007380; margin: 0;">MedRelief</h2>
+              <p style="font-size: 11px; color: #374151; margin: 2px 0;">Non-Profit Medicine Donation &amp; Redistribution Network</p>
+              <p style="font-size: 10px; color: #6B7280; margin: 0;">Certified Clinical Pharmacist Safety Audit Compliance</p>
+            </div>
+          </div>
+          <div style="text-align: right; font-size: 11px; color: #4B5563;">
+            <div style="font-weight: 700; color: #007380;">AUDIT COMPLIANCE REPORT</div>
+            <div>Date: <span id="report-date-str" class="font-mono">--</span></div>
+            <div>Status: <span style="color: #3b753c; font-weight: 700;">APPROVED & SEALED</span></div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; background: #F9FAFB; padding: 14px; border-radius: 8px;">
+          <div>
+            <span style="font-size: 10px; text-transform: uppercase; color: #6B7280; font-weight: 700;">Medical Waste Diverted</span>
+            <div style="font-size: 20px; font-weight: 800; color: #007380;" id="rep-kg">0.00 kg</div>
+          </div>
+          <div>
+            <span style="font-size: 10px; text-transform: uppercase; color: #6B7280; font-weight: 700;">Total Strips Kept From Landfill</span>
+            <div style="font-size: 20px; font-weight: 800; color: #1F2937;" id="rep-strips">0</div>
+          </div>
+          <div>
+            <span style="font-size: 10px; text-transform: uppercase; color: #6B7280; font-weight: 700;">Enrolled Student Donors</span>
+            <div style="font-size: 20px; font-weight: 800; color: #1F2937;" id="rep-students">0</div>
+          </div>
+          <div>
+            <span style="font-size: 10px; text-transform: uppercase; color: #6B7280; font-weight: 700;">Charitable NGO Dispatches</span>
+            <div style="font-size: 20px; font-weight: 800; color: #3b753c;" id="rep-claims">0</div>
+          </div>
+        </div>
+
+        <h4 style="font-size: 14px; font-weight: 800; color: #1F2937; margin-bottom: 8px;">Verified Medicine Redistribution Ledger</h4>
+        <div class="table-container" style="border: 1px solid #E5E7EB; margin-bottom: 24px;">
+          <table class="data-table" style="font-size: 11px;">
+            <thead>
+              <tr style="background: #f1f5f9;">
+                <th>Tracking ID</th>
+                <th>Brand & Formulation</th>
+                <th>Quantity</th>
+                <th>Expiry</th>
+                <th>Donor Roll</th>
+                <th>Final Status</th>
+                <th>Recipient Partner</th>
+              </tr>
+            </thead>
+            <tbody id="report-ledger-tbody">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-top: 40px; padding-top: 20px; border-top: 1px solid #E5E7EB;">
+          <div style="font-size: 10px; color: #6B7280;">
+            MedRelief Campus Platform • Zero Commercial Consideration • 100% Free Charitable Aid
+          </div>
+          <div style="text-align: center;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; color: #007380; border-bottom: 1px solid #007380; padding-bottom: 4px; width: 180px;">
+              Dr. S. K. Mehta
+            </div>
+            <div style="font-size: 10px; color: #4B5563; margin-top: 4px;">Licensed Campus Pharmacist</div>
+            <div style="font-size: 9px; color: #9CA3AF;">Reg #MH-PH-88231</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="js/admin.js" type="module"></script>
+</body>
+</html>
+

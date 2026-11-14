@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="primaryTealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0090a0"/>
+      <stop offset="60%" stop-color="#007380"/>
+      <stop offset="100%" stop-color="#00474f"/>
+    </linearGradient>
+    <linearGradient id="leafGreenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#84c685"/>
+      <stop offset="100%" stop-color="#6EB56F"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="120" height="120" rx="30" fill="url(#primaryTealGrad)"/>
+  <rect x="48" y="24" width="24" height="72" rx="12" fill="#FFFFFF" opacity="0.95"/>
+  <rect x="24" y="48" width="72" height="24" rx="12" fill="#FFFFFF" opacity="0.95"/>
+  <g transform="translate(42, 42) rotate(45, 18, 18)">
+    <rect x="6" y="0" width="24" height="18" rx="8" fill="#FFFFFF"/>
+    <rect x="6" y="18" width="24" height="18" rx="8" fill="url(#leafGreenGrad)"/>
+    <line x1="6" y1="18" x2="30" y2="18" stroke="#00474f" stroke-width="2" opacity="0.4"/>
+  </g>
+  <path d="M 85 25 C 102 26 108 40 102 52 C 92 52 82 44 85 25 Z" fill="url(#leafGreenGrad)"/>
+  <circle cx="28" cy="28" r="4" fill="#6EB56F"/>
+</svg>

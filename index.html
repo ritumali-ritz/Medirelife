@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>MedRelief – Campus Medicine Donation &amp; Redistribution Platform</title>
+  <meta name="description" content="Pure non-profit circular medicine redistribution platform. Zero monetization, pharmacist clinical verification, and charitable NGO distribution.">
+  <meta name="theme-color" content="#007380">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Tesseract.js v5 CDN for In-Browser OCR -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+</head>
+<body>
+
+  <!-- ============================================================================
+       3-SECOND MEDRELIEF SPLASH SCREEN
+       Full-Screen Platform Intro (No Timer)
+       ============================================================================ -->
+  <div id="splash-screen" class="splash-overlay">
+    <div class="splash-card">
+      <div class="splash-emblem-wrap">
+        <div class="splash-emblem-badge">+</div>
+        <div class="splash-logo-brand" style="font-size: 22px; font-weight: 800; color: var(--primary);">MedRelief</div>
+      </div>
+      <span class="splash-badge">🌱 Student Social Responsibility Initiative</span>
+      <h1 class="splash-title">MedRelief</h1>
+      <p class="splash-subtitle">Pure Non-Profit Campus Medicine Donation &amp; Redistribution</p>
+      <div class="splash-collab-line">
+        Zero Medical Waste &bull; Licensed Pharmacist Audited &bull; 100% Free Patient Aid
+      </div>
+      <div class="splash-progress-track">
+        <div class="splash-progress-bar" id="splash-progress-bar"></div>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:center; margin-top:8px;">
+        <button class="btn-skip-splash" id="btn-skip-splash" onclick="window.hideSplash()">Enter Platform &#8594;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statutory Non-Profit Disclaimer Bar -->
+  <aside class="statutory-banner">
+    <div class="banner-container">
+      <div>
+        <strong>Institutional Campus Mandate:</strong> Pure non-profit campus initiative operating exclusively within university grounds.
+        <strong>NO MEDICINES ARE SOLD OR MONETIZED.</strong>
+      </div>
+      <div class="badge-verified-protocol">
+        <span>&#10003;</span> Licensed Pharmacist Clinical Verification Required
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============================================================================
+       MAIN HEADER & NAVIGATION
+       ============================================================================ -->
+  <header class="main-header">
+    <div class="header-container">
+      <!-- Logo -->
+      <div class="brand-logo" onclick="window.switchTab('overview')">
+        <div class="logo-badge">+</div>
+        <div class="brand-text">
+          <h1>
+            MedRelief
+            <span class="campus-pill">Campus Initiative</span>
+          </h1>
+          <p>Zero Monetization &bull; Verified Redistribution</p>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="nav-tabs" id="nav-tabs">
+        <button class="nav-tab-btn active" data-tab="overview">
+          <span class="tab-icon">&#127963;&#65039;</span> Home
+        </button>
+        <button class="nav-tab-btn" data-tab="about">
+          <span class="tab-icon">&#127891;</span> About Us
+        </button>
+        <button class="nav-tab-btn" data-tab="student">
+          <span class="tab-icon">&#128138;</span> Donate
+        </button>
+        <button class="nav-tab-btn" data-tab="collector">
+          <span class="tab-icon">&#128230;</span> Collector
+        </button>
+        <button class="nav-tab-btn" data-tab="ngo">
+          <span class="tab-icon">&#127970;</span> NGO Portal
+        </button>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="header-actions">
+        <div id="user-auth-badge" class="user-auth-badge" style="display:none;"></div>
+        <button id="btn-auth-open" class="btn-auth-toggle" onclick="window.openAuthModal('login')">
+          &#128100; Login
+        </button>
+        <button id="btn-pwa-install" class="btn-pwa-install" style="display:none;">
+          &#128242; Install App
+        </button>
+        <button id="btn-open-drawer" class="btn-icon-badge" title="Milestone Notifications">
+          &#128276;
+          <span id="badge-count" class="badge-count" style="display:none;">0</span>
+        </button>
+        <a href="/admin" class="btn-admin-link" title="Admin Portal">&#9889;</a>
+        <button id="btn-mobile-menu" class="btn-mobile-menu" aria-label="Toggle Navigation">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================================
+       MAIN CONTENT
+       ============================================================================ -->
+  <main class="main-content">
+
+    <!-- ======================================================================
+         TAB 1: HOME / OVERVIEW
+         ====================================================================== -->
+    <section id="tab-overview" class="tab-pane active">
+
+      <!-- Hero Banner -->
+      <div class="hero-banner">
+        <div class="hero-pill">
+          <span>&#10024;</span> Student Healthcare Initiative &bull; Zero Medical Waste
+        </div>
+        <h2 class="hero-title">
+          Turning Surplus Medicine Into <span style="color:var(--accent);">Hope</span>
+        </h2>
+        <p class="hero-description">
+          Students scan blister packs via in-browser OCR, campus collectors retrieve drop-box packages, licensed pharmacists certify clinical safety, and accredited partner NGOs distribute 100% free of charge to underprivileged communities.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-hero-primary" onclick="window.switchTab('student')">
+            <span>&#128138;</span> Donate Medicine &rarr;
+          </button>
+          <button class="btn-hero-secondary" onclick="window.switchTab('about')">
+            <span>&#127891;</span> About MedRelief Initiative
+          </button>
+        </div>
+        <div class="hero-trust-bar">
+          <div class="trust-pill"><span>&#128737;&#65039;</span> Licensed Pharmacist Audited</div>
+          <div class="trust-pill"><span>&#128138;</span> 100% Free Patient Aid</div>
+          <div class="trust-pill"><span>&#128230;</span> Smart Monitored Drop-Boxes</div>
+          <div class="trust-pill"><span>&#128242;</span> Live Milestone Tracking</div>
+        </div>
+        <div class="hero-watermark">+</div>
+      </div>
+
+      <!-- Live Dynamic Medicine Stats -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-top">
+            <span class="metric-label">Total Waste Diverted</span>
+            <div class="metric-icon-wrap green">&#127807;</div>
+          </div>
+          <div class="metric-value" id="stat-kg-diverted">0.00 <span>kg</span></div>
+          <div class="metric-sub" id="stat-strips-diverted">0 strips kept from landfills</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-top">
+            <span class="metric-label">Verified Safe Stock</span>
+            <div class="metric-icon-wrap">&#128737;&#65039;</div>
+          </div>
+          <div class="metric-value" id="stat-verified-stock">0</div>
+          <div class="metric-sub"><strong>Pharmacist</strong> audited batches</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-top">
+            <span class="metric-label">NGO Free Dispatches</span>
+            <div class="metric-icon-wrap green">&#127970;</div>
+          </div>
+          <div class="metric-value" id="stat-ngo-claims">0</div>
+          <div class="metric-sub">100% Free charitable distribution</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-top">
+            <span class="metric-label">Student Donors</span>
+            <div class="metric-icon-wrap">&#127891;</div>
+          </div>
+          <div class="metric-value" id="stat-active-donors">0</div>
+          <div class="metric-sub">Active Community Donors</div>
+        </div>
+      </div>
+
+      <!-- Clinical Safety Highlights -->
+      <div class="safety-pillars-section">
+        <div class="section-header" style="margin-bottom: 14px;">
+          <div class="section-eyebrow">Safety Protocols</div>
+          <h3 class="section-title">Clinical Safety &amp; Trust First</h3>
+          <p class="section-subtitle">Every single blister pack undergoes strict verification before being approved for charitable patient aid.</p>
+        </div>
+        <div class="safety-pillars-grid">
+          <div class="safety-pillar-card">
+            <div class="safety-pillar-icon">&#128737;&#65039;</div>
+            <h4>Pharmacist Clinical Inspection</h4>
+            <p>Licensed pharmacists verify factory seals, batch numbers, and enforce a mandatory 60+ days remaining shelf life rule.</p>
+          </div>
+          <div class="safety-pillar-card">
+            <div class="safety-pillar-icon">&#128205;</div>
+            <h4>Monitored Smart Drop-Boxes</h4>
+            <p>Secure, climate-protected drop-boxes stationed across campus nodes are cleared daily by trained collection volunteers.</p>
+          </div>
+          <div class="safety-pillar-card">
+            <div class="safety-pillar-icon">&#129309;</div>
+            <h4>Photo-Verified NGO Handover</h4>
+            <p>Stock is transferred strictly to accredited non-profit NGOs with verifiable handover delivery photos and digital signatures.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           STORIES OF HOPE SECTION (Matching Image 1)
+           ===================================================================== -->
+      <div class="stories-of-hope-container">
+        <div class="stories-of-hope-header">
+          <h2 class="stories-of-hope-title">Stories of Hope</h2>
+        </div>
+
+        <div id="stories-carousel">
+          <div class="story-card active-story" id="story-0">
+            <div class="story-image-wrap">
+              <img src="assets/images/story-hope-1.jpg" alt="Bisahu Khare, Chhattisgarh" />
+            </div>
+            <div class="story-content">
+              <h4>Bisahu Khare, Chhattisgarh</h4>
+              <p>My little grandson is the light of my life. His mother passed away while giving birth to him, but that day, I resolved I would love and care for him so much that he would never feel the absence of his mother. However, a few months later, when I started having health problems of my own, I realized I was getting older. I panicked, thinking who would take care of little Surya now! As soon as I visited the mobile medical van, the doctors started regular treatment for my muscle pain and hypertension. Their assurances and guidance gave me the hope that little Surya will not be left alone. With a strong will and the kind gesture of these doctors, I have been able to take care of my health, so that my grandson can have a better future.</p>
+            </div>
+          </div>
+          <div class="story-card" id="story-1" style="display:none;">
+            <div class="story-image-wrap">
+              <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&auto=format&fit=crop&q=80" alt="Ramabai Sutar, Pune" />
+            </div>
+            <div class="story-content">
+              <h4>Ramabai Sutar, Pune Rural</h4>
+              <p>Living in a small village outside Pune, diabetes medicines were always too expensive for our family. The MedRelief team, through the Seva Rural Health Mission, delivered sealed, verified medicines directly to our health camp. My husband can now manage his sugar levels without financial stress. The students who donated their surplus medicines gave us the gift of health.</p>
+            </div>
+          </div>
+          <div class="story-card" id="story-2" style="display:none;">
+            <div class="story-image-wrap">
+              <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&auto=format&fit=crop&q=80" alt="Pradeep Kamble, Pimpri" />
+            </div>
+            <div class="story-content">
+              <h4>Pradeep Kamble, Pimpri Chinchwad</h4>
+              <p>After losing my job, I could not afford the antibiotics prescribed for my infection. Jan Swasthya Camp Network, in coordination with MedRelief, provided me with pharmacist-verified, sealed Amoxicillin strips. I recovered fully and was able to get back on my feet. This campus initiative by student volunteers truly saved my health during the worst time of my life.</p>
+            </div>
+          </div>
+          <div class="story-card" id="story-3" style="display:none;">
+            <div class="story-image-wrap">
+              <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&auto=format&fit=crop&q=80" alt="Dr. Matthew Joseph" />
+            </div>
+            <div class="story-content">
+              <h4>Dr. Matthew Joseph, Red Cross Mobile Wing</h4>
+              <p>As a field doctor running mobile health camps across rural villages, the genuine, sealed medicines from MedRelief have been invaluable. We receive pharmacist-verified, temperature-safe medication that we can directly administer. This student-led initiative is a model that every university campus should replicate. The positive impact on rural communities is immeasurable.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Dots -->
+        <div class="story-dots-nav">
+          <button class="story-dot active" onclick="window.gotoStory(0)"></button>
+          <button class="story-dot" onclick="window.gotoStory(1)"></button>
+          <button class="story-dot" onclick="window.gotoStory(2)"></button>
+          <button class="story-dot" onclick="window.gotoStory(3)"></button>
+        </div>
+      </div>
+
+      <!-- Campus Drop-Off Locations -->
+      <div class="app-card">
+        <div class="section-header" style="margin-bottom: 12px;">
+          <div class="section-eyebrow">Campus Drop-Off Network</div>
+          <h3 class="section-title">Monitored Smart Drop-Boxes</h3>
+          <p class="section-subtitle">Accessible, secure drop-boxes installed throughout designated campus premises.</p>
+        </div>
+        <div class="lockers-grid" id="lockers-container"></div>
+      </div>
+
+      <!-- =====================================================================
+           FEEDBACK WALL
+           ===================================================================== -->
+      <div class="app-card">
+        <div class="section-header">
+          <div class="section-eyebrow">Student &amp; Community Voice</div>
+          <h3 class="section-title">What Our Campus Says</h3>
+          <p class="section-subtitle">Real testimonials from student donors, pharmacists, and NGO partners.</p>
+        </div>
+
+        <div class="feedback-submit-panel">
+          <h4 class="feedback-submit-title">Share Your Experience</h4>
+          <form id="form-feedback">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Your Name <span class="req">*</span></label>
+                <input type="text" id="fb-name" placeholder="e.g. Riya Shah" required />
+              </div>
+              <div class="form-group">
+                <label>Roll No. / Organization</label>
+                <input type="text" id="fb-roll" placeholder="e.g. 2024-MCA-042" />
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Category</label>
+                <select id="fb-category">
+                  <option>General Experience</option>
+                  <option>Drop-Box Convenience</option>
+                  <option>Pharmacist Verification</option>
+                  <option>NGO Partner Experience</option>
+                  <option>Donation Process</option>
+                  <option>App / OCR Feature</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Rating</label>
+                <div class="star-rating-row" id="star-rating-row">
+                  <button type="button" class="star-btn" data-val="1">&#9733;</button>
+                  <button type="button" class="star-btn" data-val="2">&#9733;</button>
+                  <button type="button" class="star-btn" data-val="3">&#9733;</button>
+                  <button type="button" class="star-btn" data-val="4">&#9733;</button>
+                  <button type="button" class="star-btn active" data-val="5">&#9733;</button>
+                </div>
+                <input type="hidden" id="fb-rating" value="5" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Your Message <span class="req">*</span></label>
+              <textarea id="fb-message" rows="3" placeholder="Share how MedRelief impacted you or your community..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="padding:10px 24px;">
+              &#128172; Submit Feedback
+            </button>
+          </form>
+        </div>
+
+        <div id="feedback-wall" class="feedback-grid"></div>
+      </div>
+
+      <!-- =====================================================================
+           FAQ ACCORDION (Matching Image 2)
+           ===================================================================== -->
+      <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-header" onclick="window.toggleFaq(this)">
+              <span class="faq-question">Can I donate medicines from home / hostel?</span>
+              <div class="faq-toggle-btn">+</div>
+            </div>
+            <div class="faq-answer">Yes! Simply register on MedRelief, fill the donation form with the medicine details (or use our in-browser OCR to scan the blister pack), and drop the sealed package at any of our monitored campus smart drop-boxes across campus premises. Our volunteer crew will collect it within 24 hours.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-header" onclick="window.toggleFaq(this)">
+              <span class="faq-question">What types of medicines are accepted for donation?</span>
+              <div class="faq-toggle-btn">+</div>
+            </div>
+            <div class="faq-answer">We accept only factory-sealed, unbroken blister packs with more than 60 days of shelf life remaining. This includes common medicines like Paracetamol, Cetirizine, Metformin, Pantoprazole, and Antibiotics in original packaging. Loose pills, vials, injectables, or opened packets are strictly not accepted.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-header" onclick="window.toggleFaq(this)">
+              <span class="faq-question">How are medicines verified before distribution?</span>
+              <div class="faq-toggle-btn">+</div>
+            </div>
+            <div class="faq-answer">Every donated medicine undergoes a mandatory 3-point clinical inspection by a licensed pharmacist: (1) Physical blister seal integrity check, (2) Expiry date validation — minimum 60 days remaining required, (3) Batch number and formulation legibility verification. Only pharmacist-approved batches enter the non-profit distribution pool.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-header" onclick="window.toggleFaq(this)">
+              <span class="faq-question">Are the medicines sold or charged to recipients?</span>
+              <div class="faq-toggle-btn">+</div>
+            </div>
+            <div class="faq-answer">Absolutely not. MedRelief is a pure non-profit campus initiative operating under our non-profit institutional mandate. No medicine is ever sold, billed, or monetized at any point. Partner NGOs are legally bound to distribute all received stock completely free of charge to underprivileged patients.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-header" onclick="window.toggleFaq(this)">
+              <span class="faq-question">Will I be notified about my donation's progress?</span>
+              <div class="faq-toggle-btn">+</div>
+            </div>
+            <div class="faq-answer">Yes! You will receive automated email notifications at every milestone: when your donation is registered, when our campus crew collects it, when the pharmacist verifies it, and finally when it reaches the partner NGO for free patient distribution. You can also track live status in the Student Donor portal.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-header" onclick="window.toggleFaq(this)">
+              <span class="faq-question">Which NGOs receive the donated medicines?</span>
+              <div class="faq-toggle-btn">+</div>
+            </div>
+            <div class="faq-answer">We partner with vetted charitable organizations: Red Cross Mobile Campus Wing (emergency &amp; first aid), Seva Rural Health Mission (diabetes &amp; hypertension care), Samarpan Elderly Foundation (senior citizen care), and Jan Swasthya Camp Network (urban slum preventive healthcare). NGO matching is done intelligently based on the medicine's therapeutic category.</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ======================================================================
+         TAB 2: ABOUT US
+         ====================================================================== -->
+    <section id="tab-about" class="tab-pane">
+
+      <div class="about-hero-card">
+        <div class="about-main-card">
+          <div class="about-brand-emblem">
+            <div class="logo-badge large" style="font-size:32px;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--primary);color:#fff;border-radius:16px;">+</div>
+          </div>
+          <div class="about-main-info">
+            <h2>MedRelief &mdash; Campus &amp; Community Medicine Redistribution</h2>
+            <div class="about-trust-badges">
+              <span class="trust-badge">&#127793; 100% Non-Profit Initiative</span>
+              <span class="trust-badge">&#128737;&#65039; Licensed Pharmacist Verified</span>
+              <span class="trust-badge">&#129309; Verified NGO Partnerships</span>
+              <span class="trust-badge">&#128274; End-to-End Chain of Custody</span>
+            </div>
+            <p>MedRelief is a dedicated student-led healthcare initiative channeling surplus sealed medicines to underprivileged communities through a strict, pharmacist-inspected, zero-monetization pipeline. No medicines are ever sold or commercialized &mdash; our sole mission is eliminating medical waste and saving lives.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-mvv-grid">
+        <div class="about-mvv-card">
+          <div class="mvv-icon">&#127919;</div>
+          <h3>Mission</h3>
+          <p>Eliminate campus medical waste by creating a systematic, pharmacist-verified pipeline that channels surplus sealed medicines from student donors to underprivileged communities through accredited NGO partners — with zero monetization and full clinical accountability.</p>
+        </div>
+        <div class="about-mvv-card">
+          <div class="mvv-icon">&#127775;</div>
+          <h3>Vision</h3>
+          <p>A campus where every surplus medicine reaches a patient who needs it, every student donor is an agent of social change, and no sealed tablet is ever needlessly wasted when lives can be saved through thoughtful redistribution.</p>
+        </div>
+        <div class="about-mvv-card">
+          <div class="mvv-icon">&#9878;&#65039;</div>
+          <h3>Values</h3>
+          <p>Clinical Safety First &bull; Radical Transparency &bull; Zero Commercial Interest &bull; Pharmacist-Led Quality Control &bull; Student Social Responsibility &bull; NGO Partner Accountability &bull; Environmental Stewardship.</p>
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           OUR CAMPUS INITIATIVE (Animated 5-Step Redistribution Journey)
+           ===================================================================== -->
+      <div class="app-card initiative-container" id="about-initiative-section">
+        <div class="section-header">
+          <div class="section-eyebrow">Operational Framework</div>
+          <h3 class="section-title">Our Campus Initiative: The 5-Step Redistribution</h3>
+          <p class="section-subtitle">How surplus sealed medicines safely journey from student donors to accredited NGO community clinics with 100% clinical accountability.</p>
+        </div>
+        <div class="initiative-grid" id="initiative-cards-grid">
+          <div class="initiative-card">
+            <div class="initiative-step-badge">STEP 01</div>
+            <div class="initiative-card-icon">&#128138;</div>
+            <h4>Student Pledge &amp; Web OCR</h4>
+            <p>Scan blister packs using in-browser camera OCR or enter details manually. Automated validation verifies drug names and expiry dates.</p>
+            <span class="initiative-tag">In-Browser OCR</span>
+          </div>
+          <div class="initiative-card">
+            <div class="initiative-step-badge">STEP 02</div>
+            <div class="initiative-card-icon">&#128230;</div>
+            <h4>Collector Drop-Box Pickup</h4>
+            <p>Trained student volunteer crew empties monitored smart drop-boxes across campus hostels, library, and academic foyers.</p>
+            <span class="initiative-tag">Campus Route</span>
+          </div>
+          <div class="initiative-card">
+            <div class="initiative-step-badge">STEP 03</div>
+            <div class="initiative-card-icon">&#128737;&#65039;</div>
+            <h4>Pharmacist Clinical Audit</h4>
+            <p>Licensed campus pharmacist conducts 3-point clinical checks: blister seal integrity, expiry &gt;60 days rule, and formulation safety.</p>
+            <span class="initiative-tag">Clinical Certification</span>
+          </div>
+          <div class="initiative-card">
+            <div class="initiative-step-badge">STEP 04</div>
+            <div class="initiative-card-icon">&#127970;</div>
+            <h4>Accredited NGO Dispatch</h4>
+            <p>Verified partner NGOs receive batches for rural healthcare and slum medical camps with mandatory physical photo proof and digital sign-off.</p>
+            <span class="initiative-tag">Zero-Cost Patient Aid</span>
+          </div>
+          <div class="initiative-card">
+            <div class="initiative-step-badge">STEP 05</div>
+            <div class="initiative-card-icon">&#128276;</div>
+            <h4>Student Milestone Alerts</h4>
+            <p>Automated SMS and email updates trigger at every milestone step, providing the student with full custody transparency for their medicine.</p>
+            <span class="initiative-tag">Automated Alert</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Work Timeline (Scroll-Animated) -->
+      <div class="app-card" id="about-timeline-card">
+        <div class="section-header">
+          <div class="section-eyebrow">Our Journey</div>
+          <h3 class="section-title">MedRelief Journey &amp; Timeline</h3>
+          <p class="section-subtitle">From student concept to university-recognized non-profit healthcare redistribution network.</p>
+        </div>
+        <div class="about-timeline" id="about-timeline-list">
+          <div class="about-timeline-item">
+            <div class="about-timeline-dot"></div>
+            <div class="about-timeline-content">
+              <span class="about-timeline-year">2024 — Q1</span>
+              <h4>Concept &amp; Ideation</h4>
+              <p>MCA students identify campus medicine waste problem. Healthcare redistribution project proposal drafted and presented to institutional advisors.</p>
+            </div>
+          </div>
+          <div class="about-timeline-item">
+            <div class="about-timeline-dot"></div>
+            <div class="about-timeline-content">
+              <span class="about-timeline-year">2024 — Q2</span>
+              <h4>Pharmacist Partnership</h4>
+              <p>Licensed Pharmacist Dr. S.K. Mehta joins as chief clinical auditor. Clinical safety protocols drafted and approved by institution.</p>
+            </div>
+          </div>
+          <div class="about-timeline-item">
+            <div class="about-timeline-dot"></div>
+            <div class="about-timeline-content">
+              <span class="about-timeline-year">2024 — Q3</span>
+              <h4>Smart Drop-Boxes Installed</h4>
+              <p>4 monitored smart drop-boxes deployed across campus high-traffic nodes: Central Library, Student Health Center, Academic Block A, and Hostel Complex.</p>
+            </div>
+          </div>
+          <div class="about-timeline-item">
+            <div class="about-timeline-dot"></div>
+            <div class="about-timeline-content">
+              <span class="about-timeline-year">2025 — Q1</span>
+              <h4>NGO Network Formation</h4>
+              <p>4 verified NGO partners onboarded: Red Cross Mobile Wing, Seva Rural Health Mission, Samarpan Elderly Foundation, Jan Swasthya Network.</p>
+            </div>
+          </div>
+          <div class="about-timeline-item">
+            <div class="about-timeline-dot active-tl"></div>
+            <div class="about-timeline-content">
+              <span class="about-timeline-year">2026 — Now</span>
+              <h4>Tech Platform Launch</h4>
+              <p>Full-stack MedRelief web platform with In-Browser OCR, real-time milestone tracking, NGO suggestion engine, and automated email notifications goes live.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team Workers Auto-Slider -->
+      <div class="app-card">
+        <div class="section-header">
+          <div class="section-eyebrow">Our People</div>
+          <h3 class="section-title">The MedRelief Team</h3>
+          <p class="section-subtitle">Students, faculty, pharmacist, and NGO volunteers who make zero medical waste a reality across our campus.</p>
+        </div>
+        <div class="team-slider-wrapper">
+          <button class="team-slider-arrow left" onclick="window.slideTeam(-1)">&#8249;</button>
+          <div class="team-slider-container">
+            <div class="team-cards-track" id="team-cards-track"></div>
+          </div>
+          <button class="team-slider-arrow right" onclick="window.slideTeam(1)">&#8250;</button>
+        </div>
+      </div>
+
+      <!-- Impact Numbers -->
+      <div class="about-impact-section">
+        <h3 class="about-impact-title">Our Impact So Far</h3>
+        <div class="about-impact-grid">
+          <div class="about-impact-num">
+            <span id="about-stat-strips">0</span>
+            <label>Medicine Strips Diverted from Waste</label>
+          </div>
+          <div class="about-impact-num">
+            <span id="about-stat-kg">0.00</span>
+            <label>Kilograms of Medical Waste Prevented</label>
+          </div>
+          <div class="about-impact-num">
+            <span id="about-stat-donors">0</span>
+            <label>Student Donors Enrolled</label>
+          </div>
+          <div class="about-impact-num">
+            <span id="about-stat-ngo">0</span>
+            <label>Charitable NGO Dispatches</label>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ======================================================================
+         TAB 3: STUDENT / DONOR HUB
+         ====================================================================== -->
+    <section id="tab-student" class="tab-pane">
+
+      <!-- Donor Auth Lock Warning Card (Shown when not logged in) -->
+      <div id="donor-auth-lock-card" class="donor-auth-lock-card" style="display: none;">
+        <div class="lock-card-icon">&#128274;</div>
+        <div class="lock-card-content">
+          <h4>Student Sign-In Required to Donate</h4>
+          <p>To preserve campus clinical accountability and ensure automated milestone tracking of your medicines, you must be signed in before taking camera OCR scans or uploading blister pack verification photos.</p>
+          <div class="lock-card-actions">
+            <button type="button" class="btn-primary" onclick="window.openAuthModal('login')">&#128100; Log In as Student</button>
+            <button type="button" class="btn-outline" onclick="window.openAuthModal('register')">&#9997;&#65039; Register New Student</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-card" style="padding: 18px 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <div id="student-profile-card"></div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <select id="student-profile-select" style="padding: 8px 12px; font-size: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-dark); font-family: inherit;"></select>
+            <button id="btn-toggle-edit-student" class="btn-outline">Edit Registration</button>
+          </div>
+        </div>
+        <div id="edit-student-card" style="display: none; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border-color);">
+          <form id="form-edit-student">
+            <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+              <div class="form-group"><label>Full Name</label><input type="text" id="edit-student-name" required /></div>
+              <div class="form-group"><label>Roll Number</label><input type="text" id="edit-student-roll" required /></div>
+              <div class="form-group"><label>Division / Class</label><input type="text" id="edit-student-div" required /></div>
+              <div class="form-group"><label>Phone Number</label><input type="text" id="edit-student-phone" required /></div>
+              <div class="form-group"><label>Email Address</label><input type="email" id="edit-student-email" required /></div>
+            </div>
+            <button type="submit" class="btn-primary" style="padding: 8px 18px; font-size: 12px;">Save Details</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="two-col-layout">
+        <!-- Left: Donation Submission Form -->
+        <div class="app-card">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+            <div>
+              <div class="section-eyebrow">Step 1: Medicine Entry</div>
+              <h3 style="font-size: 18px; font-weight: 800; color: var(--text-dark);">Donate Surplus Medicine</h3>
+            </div>
+            <button type="button" id="btn-trigger-ocr" class="btn-accent" style="padding: 8px 14px; font-size: 12px;">
+              &#128247; Scan Blister (OCR)
+            </button>
+          </div>
+
+          <form id="form-donation">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Brand Name (On Packet)</label>
+                <input type="text" id="form-brand-name" placeholder="e.g. Dolo 650, Augmentin 625" />
+              </div>
+              <div class="form-group">
+                <label>Generic Formulation <span class="req">*</span></label>
+                <input type="text" id="form-drug-name" placeholder="e.g. Paracetamol 650mg" required />
+              </div>
+            </div>
+
+            <!-- Smart NGO Suggestion Box -->
+            <div class="suggested-ngo-box" id="ngo-suggestion-box">
+              <span class="suggested-ngo-badge">&#129302; AI NGO Match</span>
+              <div style="font-size: 13px; font-weight: 700; color: var(--text-dark);" id="ngo-suggest-name">&mdash;</div>
+              <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;" id="ngo-suggest-focus">Analyzing medicine category...</div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Number of Strips <span class="req">*</span></label>
+                <input type="number" id="form-quantity" min="1" max="50" value="1" required />
+                <div class="form-help">Only intact, sealed strips are accepted.</div>
+              </div>
+              <div class="form-group">
+                <label>Expiry Date <span class="req">*</span></label>
+                <input type="date" id="form-expiry" required />
+                <div class="form-help">Must have &gt; 60 days shelf-life remaining.</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Designated Campus Drop-Box <span class="req">*</span></label>
+              <select id="form-drop-point" required></select>
+            </div>
+
+            <div class="form-group">
+              <label>Blister Pack Verification Photo</label>
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <img id="blister-preview-img" style="display: none; width: 60px; height: 60px; border-radius: var(--radius-sm); object-fit: cover; border: 1px solid var(--border-color);" />
+                <label class="btn-outline" style="cursor: pointer;">
+                  &#128193; Select Picture
+                  <input type="file" id="file-manual-blister" accept="image/*" style="display: none;" />
+                </label>
+                <input type="hidden" id="form-photo-url" />
+                <input type="hidden" id="form-ocr-text" />
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary" style="width: 100%; padding: 13px; font-size: 14px;">
+              + Submit Donation Pledge
+            </button>
+          </form>
+        </div>
+
+        <!-- Right: My Active Donations & Timeline -->
+        <div class="app-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div>
+              <div class="section-eyebrow">Real-Time Tracking</div>
+              <h3 style="font-size: 18px; font-weight: 800; color: var(--text-dark);">My Campus Donations</h3>
+            </div>
+            <span class="campus-pill">Live</span>
+          </div>
+          <div id="student-donations-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TAB 4: CAMPUS COLLECTOR HUB
+         ====================================================================== -->
+    <section id="tab-collector" class="tab-pane">
+      <div class="app-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+          <div>
+            <div class="section-eyebrow">Step 2: Campus Pickup Route</div>
+            <h3 class="section-title">Drop-Box Retrieval Queue</h3>
+            <p class="section-subtitle">Campus volunteer crews pick up packages from student drop-boxes and route to the pharmacy hub.</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <label style="font-size: 12px; font-weight: 700; color: var(--text-muted);">Location Filter:</label>
+            <select id="select-collector-filter" style="padding: 8px 12px; font-size: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-dark); font-family: inherit;">
+              <option value="ALL">All Campus Drop-Boxes</option>
+              <option value="Campus Central Library Foyer">Campus Central Library Foyer</option>
+              <option value="Student Health Center Lobby">Student Health Center Lobby</option>
+              <option value="Main Academic Block A Foyer">Main Academic Block A Foyer</option>
+              <option value="Student Hostel Complex Hub">Student Hostel Complex Hub</option>
+            </select>
+          </div>
+        </div>
+        <div class="cards-grid" id="collector-queue-grid"></div>
+      </div>
+      <div class="app-card">
+        <div class="section-header" style="margin-bottom: 14px;">
+          <div class="section-eyebrow">In Transit</div>
+          <h4 style="font-size: 16px; font-weight: 800; color: var(--text-dark);">Packages En Route to Pharmacy Verification Hub</h4>
+        </div>
+        <div class="cards-grid" id="collector-transit-grid"></div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TAB 5: PHARMACIST AUDIT HUB
+         ====================================================================== -->
+    <section id="tab-pharmacist" class="tab-pane">
+      <div class="notice-box">
+        <div class="notice-icon">&#128737;&#65039;</div>
+        <div>
+          <strong>Licensed Pharmacist Clinical Desk (Dr. S. K. Mehta &bull; Reg #MH-PH-88231):</strong>
+          Verify unbroken blister seals, validate expiry threshold (&gt;60 days remaining), and assign storage bin. Rejected items are routed to the university biomedical waste incinerator.
+        </div>
+      </div>
+
+      <div class="app-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 18px;">
+          <div>
+            <div class="section-eyebrow">Step 3: Clinical Inspection Queue</div>
+            <h3 class="section-title">Unverified Campus Donations</h3>
+            <p class="section-subtitle">
+              Pending: <strong id="pharmacist-pending-count" style="color: var(--primary);">0</strong> batches | Approved: <strong id="pharmacist-approved-count" style="color: var(--accent-dark);">0</strong>
+            </p>
+          </div>
+          <button id="btn-batch-approve" class="btn-accent"><span>&#10003;</span> Batch Approve Selected</button>
+        </div>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th width="40"><input type="checkbox" id="check-all-audit" onclick="document.querySelectorAll('.audit-select-check').forEach(c => c.checked = this.checked)" /></th>
+                <th width="60">Photo</th>
+                <th>Medicine Details</th>
+                <th>Quantity</th>
+                <th>Expiry Date</th>
+                <th>Seal Status</th>
+                <th width="160">Action</th>
+              </tr>
+            </thead>
+            <tbody id="pharmacist-queue-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="app-card">
+        <div class="section-header" style="margin-bottom: 14px;">
+          <div class="section-eyebrow">Active Non-Profit Stock Pool</div>
+          <h4 style="font-size: 16px; font-weight: 800; color: var(--text-dark);">Pharmacist Certified Medication Batches</h4>
+        </div>
+        <div class="cards-grid" id="pharmacist-verified-grid"></div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TAB 6: PARTNER NGO DISTRIBUTION PORTAL
+         ====================================================================== -->
+    <section id="tab-ngo" class="tab-pane">
+      <div class="notice-box warning">
+        <div class="notice-icon">&#9888;&#65039;</div>
+        <div>
+          <strong>Strict Non-Commercial Distribution Mandate:</strong> Medicines obtained through MedRelief are strictly prohibited from being sold or monetized. Handover is finalized only upon uploading a physical delivery proof photo and capturing an authorized digital signature.
+        </div>
+      </div>
+
+      <div id="ngo-claim-action-bar" style="display: none; background: var(--primary); color: #fff; padding: 14px 20px; border-radius: var(--radius-md); align-items: center; justify-content: space-between; margin-bottom: 20px; box-shadow: var(--shadow-md);">
+        <div><strong>Claim Cart:</strong> <span id="ngo-selected-count">0</span> medicine package(s) selected.</div>
+        <button class="btn-hero-primary" style="padding: 8px 18px; font-size: 13px;" onclick="window.openNgoClaimModal()">
+          Proceed to Handover Proof &amp; Signature &rarr;
+        </button>
+      </div>
+
+      <div class="app-card">
+        <div class="section-header">
+          <div class="section-eyebrow">Step 4: Non-Commercial Distribution</div>
+          <h3 class="section-title">Verified Non-Profit Stock Pool</h3>
+          <p class="section-subtitle">Exclusively includes pharmacist-approved medicines available for registered charitable NGOs.</p>
+        </div>
+        <div class="cards-grid" id="ngo-inventory-catalog"></div>
+      </div>
+
+      <div class="app-card">
+        <div class="section-header">
+          <div class="section-eyebrow">Audit Archive</div>
+          <h3 class="section-title">Completed NGO Dispatches</h3>
+          <p class="section-subtitle">Handover delivery photos &amp; digital signatures logged in central audit vault.</p>
+        </div>
+        <div class="cards-grid" id="ngo-claims-archive"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================================
+       MODALS
+       ============================================================================ -->
+
+  <!-- MODAL: User Login / Register -->
+  <div id="modal-auth" class="modal-overlay">
+    <div class="modal-card" style="max-width: 460px;">
+      <div class="modal-header">
+        <h3 id="auth-modal-title">&#127891; Student Login</h3>
+        <button class="modal-close-btn" onclick="document.getElementById('modal-auth').classList.remove('active')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="tab-login-btn" onclick="window.switchAuthTab('login')">Login</button>
+          <button class="auth-tab" id="tab-register-btn" onclick="window.switchAuthTab('register')">Register</button>
+        </div>
+
+        <form id="form-login" class="auth-form-panel">
+          <div class="form-group" style="margin-bottom:12px;">
+            <label>Roll Number or Email</label>
+            <input type="text" id="login-username" placeholder="e.g. 2024-MCA-042" required />
+          </div>
+          <div class="form-group" style="margin-bottom:16px;">
+            <label>Password</label>
+            <input type="password" id="login-password" placeholder="Your password" required />
+          </div>
+          <button type="submit" class="btn-primary" style="width:100%; padding:12px;">Login to MedRelief</button>
+          <div id="login-error" style="color:var(--danger); font-size:12px; margin-top:8px; display:none;"></div>
+          <p style="font-size:11px; color:var(--text-light); margin-top:12px; text-align:center;">Demo: Roll No: <strong>2024-MCA-042</strong>, Password: <strong>password123</strong></p>
+        </form>
+
+        <form id="form-register" class="auth-form-panel" style="display:none;">
+          <div class="form-grid">
+            <div class="form-group"><label>Full Name <span class="req">*</span></label><input type="text" id="reg-name" placeholder="e.g. Priya Sharma" required /></div>
+            <div class="form-group"><label>Roll Number <span class="req">*</span></label><input type="text" id="reg-roll" placeholder="e.g. 2024-MCA-042" required /></div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group"><label>Division / Class</label><input type="text" id="reg-division" placeholder="e.g. MCA Year 2, Div A" /></div>
+            <div class="form-group"><label>Phone Number</label><input type="text" id="reg-phone" placeholder="+91 98201 XXXXX" /></div>
+          </div>
+          <div class="form-group"><label>Email Address <span class="req">*</span></label><input type="email" id="reg-email" placeholder="your@campus.edu" required /></div>
+          <div class="form-group"><label>Password <span class="req">*</span></label><input type="password" id="reg-password" placeholder="Choose a password" required /></div>
+          <button type="submit" class="btn-primary" style="width:100%; padding:12px;">Register as Donor</button>
+          <div id="reg-error" style="color:var(--danger); font-size:12px; margin-top:8px; display:none;"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: In-Browser OCR Camera -->
+  <div id="modal-ocr" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>&#128247; In-Browser Blister Pack OCR</h3>
+        <button id="btn-close-ocr" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="camera-viewfinder">
+          <video id="ocr-video" playsinline autoplay muted></video>
+          <img id="ocr-captured-preview" style="display: none; width: 100%; height: 100%; object-fit: cover;" />
+          <div class="camera-guide-box">
+            <div class="guide-label">Align Medicine Name &amp; Expiry Date Inside Box</div>
+            <div class="guide-label" style="align-self: flex-end;">Ensure Adequate Lighting</div>
+          </div>
+        </div>
+        <canvas id="ocr-canvas" style="display: none;"></canvas>
+        <div id="ocr-camera-error" class="notice-box warning" style="display: none;"></div>
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 14px;">
+          <div>
+            <button type="button" id="btn-snap-ocr" class="btn-primary">&#128248; Capture &amp; Run OCR</button>
+            <button type="button" id="btn-retake-ocr" class="btn-outline" style="display: none;">&#128260; Retake</button>
+          </div>
+          <label class="btn-outline" style="cursor: pointer; font-size: 11px;">
+            &#128193; Upload Photo File
+            <input type="file" id="file-ocr-input" accept="image/*" style="display: none;" />
+          </label>
+        </div>
+        <div style="background: var(--tint-light); border: 1px solid var(--tint); border-radius: var(--radius-sm); padding: 10px; margin-bottom: 14px;">
+          <div style="font-size: 11px; font-weight: 700; color: var(--primary); margin-bottom: 6px;">&#10024; Test with one-click blister samples:</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;" id="ocr-samples-container"></div>
+        </div>
+        <div id="ocr-progress-box" style="display: none; margin-bottom: 14px;">
+          <div id="ocr-progress-msg" style="font-size: 11.5px; font-weight: 700; color: var(--primary); margin-bottom: 4px;">Running Tesseract OCR...</div>
+          <div style="width: 100%; height: 8px; background: #eee; border-radius: 999px; overflow: hidden;">
+            <div id="ocr-progress-bar" style="width: 10%; height: 100%; background: var(--accent); transition: width 0.2s;"></div>
+          </div>
+        </div>
+        <div id="ocr-result-card" style="display: none; background: #F9FAFB; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 14px;">
+          <div style="font-size: 12px; font-weight: 800; color: var(--text-dark); margin-bottom: 8px; border-bottom: 1px solid var(--border-color); padding-bottom: 4px;">&#10003; Parsed Pharmaceutical Entities</div>
+          <div class="form-grid" style="font-size: 12px; margin-bottom: 8px;">
+            <div><strong>Brand:</strong> <span id="ocr-res-brand" style="color: var(--primary); font-weight: 700;">-</span></div>
+            <div><strong>Generic:</strong> <span id="ocr-res-generic">-</span></div>
+            <div><strong>Expiry:</strong> <span id="ocr-res-expiry" class="font-mono font-bold">-</span></div>
+            <div><strong>Qty Detected:</strong> <span id="ocr-res-qty">-</span></div>
+          </div>
+          <div style="font-size: 10px; color: var(--text-light); font-family: var(--font-mono); background: #fff; padding: 6px; border-radius: 4px; border: 1px solid #eee;" id="ocr-res-raw"></div>
+        </div>
+        <button type="button" id="btn-apply-ocr" class="btn-accent" style="width: 100%; display: none; padding: 12px; font-size: 13px;">
+          &#10003; Confirm &amp; Pre-Fill Donation Form
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Clinical Rejection Reason -->
+  <div id="modal-reject" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header danger">
+        <h3>Log Mandatory Clinical Rejection Reason</h3>
+        <button id="btn-close-reject" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-reject">
+          <div class="notice-box warning" style="margin-bottom: 14px;"><div>Package: <strong id="reject-item-name">-</strong></div></div>
+          <div class="form-group">
+            <label>Common Clinical Grounds</label>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <button type="button" class="btn-outline" style="text-align: left; font-size: 11px;" onclick="document.getElementById('reject-reason-text').value = 'Blister seal punctured / packaging compromised.'">&#8226; Blister seal punctured / packaging compromised.</button>
+              <button type="button" class="btn-outline" style="text-align: left; font-size: 11px;" onclick="document.getElementById('reject-reason-text').value = 'Expiry date has passed campus safety threshold (< 60 days).'">&#8226; Expiry date has passed campus safety threshold (&lt; 60 days).</button>
+              <button type="button" class="btn-outline" style="text-align: left; font-size: 11px;" onclick="document.getElementById('reject-reason-text').value = 'Faded/unreadable batch number or active formulation.'">&#8226; Faded/unreadable batch number or formulation.</button>
+              <button type="button" class="btn-outline" style="text-align: left; font-size: 11px;" onclick="document.getElementById('reject-reason-text').value = 'Loose unsealed pills / moisture damage.'">&#8226; Loose unsealed pills / moisture damage.</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Detailed Pharmacist Audit Note <span class="req">*</span></label>
+            <textarea id="reject-reason-text" rows="3" placeholder="Explain clinical reason for rejection..." required></textarea>
+            <div class="form-help">This reason will be emailed to the student, and the batch will be transferred to the Campus Biomedical Waste Incinerator.</div>
+          </div>
+          <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px;">
+            <button type="button" class="btn-outline" onclick="document.getElementById('modal-reject').classList.remove('active')">Cancel</button>
+            <button type="submit" class="btn-danger">Confirm Rejection &amp; Notify Student</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Milestone Timeline Audit Trail -->
+  <div id="modal-timeline" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Donation Milestone Status Audit Trail</h3>
+        <button id="btn-close-timeline" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body" id="timeline-modal-body"></div>
+    </div>
+  </div>
+
+  <!-- MODAL: NGO Distribution Handover Proof & Signature -->
+  <div id="modal-ngo-claim" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Complete Free Handover Proof &amp; Signature</h3>
+        <button id="btn-close-ngo-claim" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-ngo-claim">
+          <div style="background: var(--tint-light); border: 1px solid var(--tint); border-radius: var(--radius-sm); padding: 12px; margin-bottom: 16px;">
+            <strong style="color: var(--primary); font-size: 12px; display: block; margin-bottom: 6px;">Allocated Medicine Batches:</strong>
+            <ul id="ngo-claim-summary-list" style="list-style: none;"></ul>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Partner NGO Organization <span class="req">*</span></label>
+              <select id="ngo-name-select" required>
+                <option value="Red Cross Mobile Campus Wing">Red Cross Mobile Campus Wing</option>
+                <option value="Seva Rural Health Mission">Seva Rural Health Mission</option>
+                <option value="Samarpan Elderly Foundation">Samarpan Elderly Foundation</option>
+                <option value="Jan Swasthya Camp Network">Jan Swasthya Camp Network</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Authorized Representative <span class="req">*</span></label>
+              <input type="text" id="ngo-rep-name" value="Dr. Matthew Joseph" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Charitable Clinic / Camp Purpose <span class="req">*</span></label>
+            <input type="text" id="ngo-purpose-notes" value="Free elderly diabetes &amp; hypertension camp in rural sector" required />
+          </div>
+          <div class="form-group">
+            <label>Physical Handover Proof Photo <span class="req">*</span></label>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <img id="ngo-proof-preview" style="display: none; width: 64px; height: 64px; border-radius: var(--radius-sm); object-fit: cover; border: 1px solid var(--border-color);" />
+              <label class="btn-outline" style="cursor: pointer;">&#128247; Upload Proof Photo<input type="file" id="file-ngo-proof" accept="image/*" style="display: none;" /></label>
+              <button type="button" id="btn-sample-proof" class="btn-outline" style="font-size: 11px;">Use Sample Proof</button>
+            </div>
+            <input type="hidden" id="ngo-proof-url" />
+            <div class="form-help">Required by campus compliance regulations.</div>
+          </div>
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <label style="margin-bottom: 0;">Authorized Digital Signature <span class="req">*</span></label>
+              <button type="button" id="btn-clear-signature" class="btn-outline" style="padding: 2px 8px; font-size: 10px;">Clear</button>
+            </div>
+            <div class="signature-box">
+              <canvas id="signature-canvas" width="560" height="140"></canvas>
+              <div id="signature-placeholder" class="signature-placeholder">Sign inside this box using finger, stylus, or mouse</div>
+            </div>
+            <div class="form-help">Legal non-commercial digital acknowledgement.</div>
+          </div>
+          <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+            <button type="button" class="btn-outline" onclick="document.getElementById('modal-ngo-claim').classList.remove('active')">Cancel</button>
+            <button type="submit" class="btn-primary">Confirm Free Non-Profit Handover</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide-Out Notification Drawer -->
+  <div id="drawer-overlay" class="drawer-overlay"></div>
+  <aside id="drawer-panel" class="drawer-panel">
+    <div class="drawer-header">
+      <div>
+        <h4 style="font-size: 14px; font-weight: 800;">Student Milestone Notifications</h4>
+        <p style="font-size: 11px; opacity: 0.85;">Automated Email Webhook Logs</p>
+      </div>
+      <button id="btn-close-drawer" class="modal-close-btn">&times;</button>
+    </div>
+    <div class="drawer-body" id="drawer-list"></div>
+  </aside>
+
+  <!-- Toast Alert Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+            <div class="logo-badge" style="width: 28px; height: 28px; font-size: 16px;">+</div>
+            <strong style="color: #fff; font-size: 15px;">MedRelief</strong>
+          </div>
+          <p>University-wide circular medicine redistribution network. Zero monetization. Pharmacist verified. 100% non-profit.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Campus Portals</h4>
+          <ul class="footer-links">
+            <li><a onclick="window.switchTab('overview')">Home &amp; Impact Stats</a></li>
+            <li><a onclick="window.switchTab('about')">About MedRelief Initiative</a></li>
+            <li><a onclick="window.switchTab('student')">Student Donor Drop-Off</a></li>
+            <li><a onclick="window.switchTab('ngo')">Partner NGO Redistribution</a></li>
+            <li><a href="/admin">Admin Vault &rarr;</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Clinical Protocols</h4>
+          <ul class="footer-links">
+            <li><span>&#8226; Unbroken blister pack seal enforcement</span></li>
+            <li><span>&#8226; Mandatory 60+ days shelf-life buffer</span></li>
+            <li><span>&#8226; Automated biomedical waste disposal</span></li>
+            <li><span>&#8226; Photo handover proof &amp; digital signatures</span></li>
+            <li><span>&#8226; Automated Email milestone alerts</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 MedRelief &bull; Pure Non-Profit Healthcare Initiative &bull; Zero Monetization</div>
+        <div>Teal: #007380 &bull; Leaf Green: #6EB56F &bull; Progressive Web App Enabled</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main Application Script (ES Module) -->
+  <script type="module" src="js/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 140" width="100%" height="100%">
+  <defs>
+    <linearGradient id="primaryTealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0090a0"/>
+      <stop offset="60%" stop-color="#007380"/>
+      <stop offset="100%" stop-color="#00474f"/>
+    </linearGradient>
+    <linearGradient id="leafGreenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#84c685"/>
+      <stop offset="100%" stop-color="#6EB56F"/>
+    </linearGradient>
+    <filter id="logoShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#007380" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Emblem Icon Group -->
+  <g transform="translate(10, 10)">
+    <!-- Base Rounded Shield / Rounded Hexagon -->
+    <rect x="0" y="0" width="120" height="120" rx="30" fill="url(#primaryTealGrad)" filter="url(#logoShadow)"/>
+    
+    <!-- Medical Cross with Capsule & Leaf -->
+    <!-- Vertical bar -->
+    <rect x="48" y="24" width="24" height="72" rx="12" fill="#FFFFFF" opacity="0.95"/>
+    <!-- Horizontal bar -->
+    <rect x="24" y="48" width="72" height="24" rx="12" fill="#FFFFFF" opacity="0.95"/>
+    
+    <!-- Center Capsule Accent (Half White, Half Leaf Green) -->
+    <g transform="translate(42, 42) rotate(45, 18, 18)">
+      <rect x="6" y="0" width="24" height="18" rx="8" fill="#FFFFFF"/>
+      <rect x="6" y="18" width="24" height="18" rx="8" fill="url(#leafGreenGrad)"/>
+      <line x1="6" y1="18" x2="30" y2="18" stroke="#00474f" stroke-width="2" opacity="0.4"/>
+    </g>
+
+    <!-- Eco Leaf / Green Sprout Accent in Top Right -->
+    <path d="M 85 25 C 102 26 108 40 102 52 C 92 52 82 44 85 25 Z" fill="url(#leafGreenGrad)"/>
+    <path d="M 85 25 C 89 36 94 44 102 52" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+
+    <!-- Small Academic Star / Dot -->
+    <circle cx="28" cy="28" r="4" fill="#6EB56F"/>
+  </g>
+
+  <!-- Brand Typography -->
+  <g transform="translate(148, 48)">
+    <text x="0" y="26" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="44" font-weight="800" fill="#007380" letter-spacing="-1">
+      Med<tspan fill="#1F2937">Relief</tspan>
+    </text>
+    
+    <!-- Non-Profit Initiative Subtitle -->
+    <g transform="translate(0, 42)">
+      <!-- Badge background -->
+      <rect x="0" y="0" width="168" height="24" rx="12" fill="#f0f8f0" stroke="#6EB56F" stroke-width="1.2"/>
+      <text x="12" y="16" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11.5" font-weight="800" fill="#3b753c" letter-spacing="0.6">
+        ZERO MEDICAL WASTE
+      </text>
+
+      <text x="180" y="16" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="600" fill="#6B7280" letter-spacing="0.2">
+        • 100% Non-Profit Redistribution
+      </text>
+    </g>
+  </g>
+</svg>
+
